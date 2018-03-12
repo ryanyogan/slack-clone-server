@@ -1,0 +1,29 @@
+{
+  "name": "slack-clone-server",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon --exec babel-node index.js"
+  },
+  "repository": "git@github.com:ryanyogan/slack-clone-server.git",
+  "author": "Ryan Yogan <ryanyogan@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-eslint": "^8.2.2",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-stage-3": "^6.24.1",
+    "eslint": "^4.18.2",
+    "eslint-config-equimper": "^2.2.2",
+    "eslint-config-prettier": "^2.9.0",
+    "nodemon": "^1.17.1",
+    "prettier": "^1.11.1"
+  },
+  "dependencies": {
+    "apollo-server-express": "^1.3.2",
+    "body-parser": "^1.18.2",
+    "express": "^4.16.3",
+    "graphql": "^0.13.1",
+    "graphql-tools": "^2.21.0"
+  }
+}
