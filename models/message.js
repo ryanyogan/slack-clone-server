@@ -1,15 +1,25 @@
 export default (seq, DataTypes) => {
-  const Message = seq.define('message', {
-    text: DataTypes.STRING
-  });
+  const Message = seq.define(
+    'message',
+    {
+      text: DataTypes.STRING
+    },
+    { underscored: true }
+  );
 
   Message.associte = models => {
     Message.belongsTo(models.Channel, {
-      foreignKey: 'channelId'
+      foreignKey: {
+        name: 'channelId',
+        field: 'channel_id'
+      }
     });
 
     Message.belongsTo(models.User, {
-      foreignKey: 'userId'
+      foreignKey: {
+        name: 'userId',
+        field: 'user_id'
+      }
     });
   };
 

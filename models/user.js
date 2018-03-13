@@ -1,20 +1,35 @@
 export default (seq, DataTypes) => {
-  const User = seq.define('user', {
-    username: {
-      type: DataTypes.STRING,
-      unique: true
+  const User = seq.define(
+    'user',
+    {
+      username: {
+        type: DataTypes.STRING,
+        unique: true
+      },
+      email: {
+        type: DataTypes.STRING,
+        unique: true
+      },
+      password: DataTypes.STRING
     },
-    email: {
-      type: DataTypes.STRING,
-      unique: true
-    },
-    password: DataTypes.STRING
-  });
+    { underscored: true }
+  );
 
   User.associte = models => {
     User.belongsToMany(models.Team, {
       through: 'member',
-      foreignKey: 'userId'
+      foreignKey: {
+        name: 'userId',
+        field: 'user_id'
+      }
+    });
+
+    User.belongsToMany(models.Channel, {
+      through: 'channel_member',
+      foreignKey: {
+        name: 'userId',
+        field: 'user_id'
+      }
     });
   };
 
