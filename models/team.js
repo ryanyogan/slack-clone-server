@@ -1,16 +1,12 @@
-export default (seq, DataTypes) => {
-  const Team = seq.define(
-    'team',
-    {
-      name: {
-        type: DataTypes.STRING,
-        unique: true
-      }
-    },
-    { underscored: true }
-  );
+export default (sequelize, DataTypes) => {
+  const Team = sequelize.define('team', {
+    name: {
+      type: DataTypes.STRING,
+      unique: true
+    }
+  });
 
-  Team.associte = models => {
+  Team.associate = models => {
     Team.belongsToMany(models.User, {
       through: 'member',
       foreignKey: {
@@ -18,7 +14,6 @@ export default (seq, DataTypes) => {
         field: 'team_id'
       }
     });
-
     Team.belongsTo(models.User, {
       foreignKey: 'owner'
     });

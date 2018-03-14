@@ -1,21 +1,17 @@
-export default (seq, DataTypes) => {
-  const User = seq.define(
-    'user',
-    {
-      username: {
-        type: DataTypes.STRING,
-        unique: true
-      },
-      email: {
-        type: DataTypes.STRING,
-        unique: true
-      },
-      password: DataTypes.STRING
+export default (sequelize, DataTypes) => {
+  const User = sequelize.define('user', {
+    username: {
+      type: DataTypes.STRING,
+      unique: true
     },
-    { underscored: true }
-  );
+    email: {
+      type: DataTypes.STRING,
+      unique: true
+    },
+    password: DataTypes.STRING
+  });
 
-  User.associte = models => {
+  User.associate = models => {
     User.belongsToMany(models.Team, {
       through: 'member',
       foreignKey: {
@@ -23,7 +19,7 @@ export default (seq, DataTypes) => {
         field: 'user_id'
       }
     });
-
+    // N:M
     User.belongsToMany(models.Channel, {
       through: 'channel_member',
       foreignKey: {
