@@ -21,10 +21,10 @@ const schema = makeExecutableSchema({
   resolvers,
 });
 
-const app = express();
-app.use(cors('*'))
-
 const graphqlEndpoint = '/graphql';
+const app = express();
+
+app.use(cors('*'))
 
 app.use(
   graphqlEndpoint,
