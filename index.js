@@ -7,6 +7,7 @@ import { fileLoader, mergeTypes, mergeResolvers } from 'merge-graphql-schemas';
 import cors from 'cors';
 
 import models from './models';
+import { SECRET, SECRET_2 } from './config/constants';
 
 const typeDefs = mergeTypes(
   fileLoader(path.join(__dirname, './graphql/schema')),
@@ -24,7 +25,7 @@ const schema = makeExecutableSchema({
 const graphqlEndpoint = '/graphql';
 const app = express();
 
-app.use(cors('*'))
+app.use(cors('*'));
 
 app.use(
   graphqlEndpoint,
@@ -36,6 +37,8 @@ app.use(
       user: {
         id: 1,
       },
+      SECRET,
+      SECRET_2,
     },
   }),
 );
