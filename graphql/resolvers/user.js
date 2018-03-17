@@ -14,30 +14,17 @@ export default {
   Query: {
     getUser: (parent, { id }, { models }) =>
       models.User.findOne({ where: { id } }),
+
     allUsers: (parent, args, { models }) => models.User.findAll(),
   },
   Mutation: {
-    login: (parent, { email, password }, { models, SECRET }) =>
-      tryLogin(email, password, models, SECRET),
-    register: async (parent, { password, ...args }, { models }) => {
-      try {
-        if (password.length < 5) {
-          return {
-            ok: false,
-            errors: [
-              {
-                path: 'password',
-                message: 'The password must contain a minimum of 5 characters.',
-              },
-            ],
-          };
-        }
+    login: (parent, { email, password }, { models, SECRET, SECRET_2 }) =>
+      tryLogin(email, password, models, SECRET, SECRET_2),
 
-        const hashedPassword = await hash(password, 12);
-        const user = await models.User.create({
-          ...args,
-          password: hashedPassword,
-        });
+    register: async (parent, args, { models }) => {
+      try {
+        const user = await models.User.create(args);
+
         return {
           ok: true,
           user,
