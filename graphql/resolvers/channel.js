@@ -1,13 +1,21 @@
+import { formatErrors } from '../../lib/formatErrors';
+
 export default {
   Mutation: {
     createChannel: async (parent, args, { models }) => {
       try {
-        await models.Channel.create(args);
-        return true;
+        const channel = await models.Channel.create(args);
+        return {
+          ok: true,
+          channel,
+        };
       } catch (error) {
         console.error(error); // eslint-disable-line
-        return false;
+        return {
+          ok: false,
+          errors: formatErrors(error),
+        };
       }
-    }
-  }
+    },
+  },
 };
