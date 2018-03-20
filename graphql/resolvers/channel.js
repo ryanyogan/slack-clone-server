@@ -13,7 +13,7 @@ export default {
         console.error(error); // eslint-disable-line
         return {
           ok: false,
-          errors: formatErrors(error),
+          errors: formatErrors(error, models),
         };
       }
     },
